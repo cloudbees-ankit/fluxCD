@@ -18,5 +18,5 @@ jobs:
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           ssh -V
-          ssh $dest $SSH_KEY  
+          ssh $dest echo "$SSH_KEY"  
           
