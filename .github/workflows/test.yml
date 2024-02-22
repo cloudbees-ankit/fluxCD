@@ -14,8 +14,11 @@ jobs:
         
 
           array=("${{secrets.TEST_SECRET}}")
+          len=${#arrat[@]}
+          echo $len
           for index in "${!array[@]}"
           do
+              echo $len
               echo "${array[index]}" >> data.pem
           done
           chmod 400 data.pem
