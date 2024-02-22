@@ -12,8 +12,8 @@ jobs:
         env:
           SSH_KEY: ${{secrets.TEST_SECRET}}
         run: |
-        
-          echo "$SSH_KEY" > data.pem
+          echo ${{ secrets.TEST_SECRET }} | base64 -d > .env.SSH_KEY
+          SSH_KEY > data.pem
           chmod 400 data.pem
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
