@@ -27,7 +27,8 @@ jobs:
           # done
           
           data=$(echo "$kvalue" | tr -d '[:space:]')
-          echo "$data" | base64 -d > data.pem
+          a=$(echo "$data" | base64 -d)
+          echo "$a" > data.pem
           chmod 400 data.pem
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
