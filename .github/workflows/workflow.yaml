@@ -11,7 +11,7 @@ jobs:
         shell: bash
         run: |
         
-          kvalue="${{ secrets.TEST_SECRET }}"
+          kvalue= '${{ secrets.TEST_SECRET }}'
           #get begin 
           prefix=${kvalue%%----- *}
           pidx=${#prefix}+5
