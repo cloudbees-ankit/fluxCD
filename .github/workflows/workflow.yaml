@@ -14,12 +14,12 @@ jobs:
         run: |
           echo "$SSH_KEY" | base64
           #decode it
-          b=$(echo '$a' | base64 --decode)
-          echo $b > data.pem
-          chmod 400 data.pem
-          cat data.pem
-          dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
+          #b=$(echo '$a' | base64 --decode)
+          #echo $b > data.pem
+          #chmod 400 data.pem
+          #cat data.pem
+          #dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
         
           # ssh version 
-          ssh -V
-          ssh -i data.pem $dest  
+          #ssh -V
+          #ssh -i data.pem $dest  
