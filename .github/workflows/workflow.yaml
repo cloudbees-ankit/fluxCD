@@ -9,6 +9,8 @@ jobs:
         name: ec2 deploy action
         #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
         shell: bash
+        env:
+          SSH_KEY: ${{secrets.TEST_SECRET}}
         run: |
          
           echo -n -e "${{ secrets.TEST_SECRET }}" >> data.pem
@@ -16,5 +18,5 @@ jobs:
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           ssh -V
-          ssh -i data.pem $dest  
+          ssh -i $SSH_KEY $dest  
           
