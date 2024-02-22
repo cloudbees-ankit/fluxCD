@@ -1,0 +1,27 @@
+name: first
+on: [push, workflow_dispatch]
+jobs:
+  job1:
+    name: First job
+    runs-on: ubuntu-latest
+    steps:
+      - id: ec2-deploy-action
+        name: ec2 deploy action
+        #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.TEST_SECRET}}
+        run: |
+        
+
+          array=("$SSH_KEY")
+          for index in "${!array[@]}"
+          do
+              echo "${array[index]}"
+          done
+          chmod 400 data.pem
+          cat data.pem
+          dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
+          ssh -V
+          ssh -i data.pem $dest  
+          
