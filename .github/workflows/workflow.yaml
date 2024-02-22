@@ -21,7 +21,7 @@ jobs:
           echo $file_size  
 
           chmod 400 result.pem
-          dest="${{ inputs.aws-user }}@${{ inputs.aws-host }}"
+          dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           # ssh version 
           ssh -V
           set -x
