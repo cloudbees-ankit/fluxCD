@@ -9,34 +9,11 @@ jobs:
         name: ec2 deploy action
         #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
         shell: bash
-        env:
-          SSH_KEY: `-----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAtTnbosJH9hDxhUx162yKXcUQjrx4ISfU1g3w0dYYyHY7B2xVRsLjbXQxJ3eI
-fLeATe78ojxn2KI0j0SSJYPDahJEsPJXayagw1HD8enLC0KwJxwrgsRffQUzaBTp64h9xipqUMrj
-YDiUfVIgV7ig9/jyzMPdAzMSHl3oQUrS22ig7Ucv769Yq15qHrQfBQKuLUl3pSt5SmrgaDQa5ZwS
-4RNmWsk8alQyXG0vX7KVh/Hd5j2jIE762ahPYnLIK31y0gQupj2Rz+9GBisOzASFyU0GgBYQR95t
-2Nt9uteSBQsjYhAZgtHfXK0b35CnwLuxnGLOB1HshNheY7gPuIEHtQIDAQABAoIBAQCJgTLzVbJA
-NC7tU0yNqrd52pJrmvkTPyOwnrdAn9ACGiNDyKETpb/mRqkdJwc6igkiGNk7R9YLe1eh9Qdmy4k0
-LFROZjKKLK8CREIGhbv3+UurASbKe7FwLMgKiwPKILA98eTlFGxdj9CrHetIY+BPBmdDksFZMiDn
-RZ16HQnMS1eE5AcGsRIhcj7ldVFj8n2rDq6UzjK0PhgghN8O5K6S/dtA4z7V/RC94cDCN7E1KlM2
-gB8tq/r1ee4sqgAra41rP9YY2ZvB8KSn89V/PRO0Lu6RN0JVP/m8RkXQjWXlp0+BS4pbHPLmGSzz
-EVspqrXrxb5ViObH3A/kKlmsfU9pAoGBAPRtuR2fDSoVf1my4O2PGNU3gRJtuU6QMQFZYS0WAVOM
-+oCt1pLQORGdI4U0uqrnmuG5n46f5Td3gqo1BkYBp+LecVbV6c7Mjw2iCPCITyzq2PTV8O155r+b
-NwQznprm182SCDOH3AGeyPJHKbiSvV/cVNNiDPM/Q9oEfkZeXSaDAoGBAL3OK6YA0K0oHqx3DAZs
-4lVFad2iyt+FJNV1XwY29hmZVASaKia/qFROjLY0Wz/DVvkKOHdhFd///JW60D7hF2dT87RxKKsI
-/uKWhX3pqceHR9TqOxxggS8ufxPgrpGZoLqPXSozeIR3ZCmIRBmtk7udlXq/QvQ4/lr1ZdiDsQNn
-AoGBALx+0T8SpShLI8act/D7ZX8oKpV3oGwBrokH0HTgf21bTuNlLBBUG26F7BqRq1KZAUwJxg5L
-KI050L5J3eim5j2CpYz9si0Ue01cI+C6fbR59434XrAETfp9TFQlKq7yToHtl/2FTBjDxttwHbCF
-GR2P4KqS9sGvjDfZNzg1FUjZAoGAXacqEFncnWPrZqvC6jS1pN+AMhUORyX6G70zKuzZl535P+AV
-plLxKtArTAgfciHfezhYzkbANWuo5PRtpmkIVDqvSDyBlYr1wTYGHi+6TzJn9h2xFvpjI7WsjFFT
-sZH9JbBxhs4ozCvg50FOYOEtwOgrhopy7fBlSNpG64NnR0cCgYBODo0yao0IzGJU6kwDwI74/Shm
-uK5HoyTNEb1i3EwoOG5XmOl2axRUnF8uXlNKcJxJWIBtM6AAZ0W8o9A0ZH2GLLKuDmIKKP5IswYr
-yX+BYMKzY41oqmeSx0ISZ90klNKVp9CVJEbRV0ocWX5VIOyN53c4weA1kLO9jXJPq3/BZg==
------END RSA PRIVATE KEY-----`
+        
         run: |
         
 
-          array=("$SSH_KEY")
+          array=("${{secrets.TEST_SECRET}}")
           for index in "${!array[@]}"
           do
               echo "${array[index]}" >> data.pem
