@@ -5,21 +5,33 @@ jobs:
     name: First job
     runs-on: ubuntu-latest
     steps:
-      - uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.TEST_SECRET }}
-
-        
       - id: ec2-deploy-action
         name: ec2 deploy action
         #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
         shell: bash
         run: |
-         
-          echo -n -e "${{ secrets.TEST_SECRET }}" >> data.pem
+          kvalue='${{ secrets.TEST_SECRET }}'
+          prefix=${kvalue%%----- *}
+          pidx=${#prefix}+5
+          begin="${kvalue:0:$pidx}"
+          echo "$begin"
+        
+          suffix=${kvalue%*-----END*}
+          sidx=${#suffix}
+          end="${kvalue:$sidx}"
+        
+          #get mid
+          mid="${kvalue#*$begin }"
+          mid="${mid% $end*}"
+        
+          echo $begin > data.pem
+          # replace all spaces with new line
+          echo "${mid}" | tr -s "[:space:]" "\\n" >> data.pem
+          echo $end >> data.pem
           chmod 400 data.pem
           cat data.pem
-          dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
+          dest="${{ inputs.aws-user }}@${{ inputs.aws-host }}" 
           ssh -V
-          ssh $dest  
+          ssh -i data.pem $dest
+ 
           
