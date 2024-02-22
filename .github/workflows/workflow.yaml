@@ -11,7 +11,7 @@ jobs:
         shell: bash
         run: |
         
-          kvalue= '$TEST'
+          kvalue= '${{ env.TEST }}'
           #get begin 
           prefix=${kvalue%%----- *}
           pidx=${#prefix}+5
