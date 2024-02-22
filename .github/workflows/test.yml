@@ -17,7 +17,7 @@ jobs:
           array=("$SSH_KEY")
           for index in "${!array[@]}"
           do
-              echo "${array[index]}"
+              echo "${array[index]}" >> data.pem
           done
           chmod 400 data.pem
           cat data.pem
