@@ -10,19 +10,30 @@ jobs:
         #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
         shell: bash
         run: |
-
-          set -x
         
+          kvalue="${{ secrets.TEST_SECRET }}"
+          #get begin 
+          prefix=${kvalue%%----- *}
+          pidx=${#prefix}+5
+          begin="${kvalue:0:$pidx}"
+          echo "$begin"
         
+          #get end
+          suffix=${kvalue%*-----END*}
+          sidx=${#suffix}
+          end="${kvalue:$sidx}"
         
-          echo "${{ secrets.TEST_SECRET }}" | tr -s  "\\n" > result.pem
-       
-          file_size=$(stat result.pem)
-          echo $file_size  
-
-          chmod 400 result.pem
+          #get mid
+          mid="${kvalue#*$begin }"
+          mid="${mid% $end*}"
+        
+          echo $begin > data.pem
+          # replace all spaces with new line
+          echo "${mid}" | tr -s "[:space:]" "\\n" >> data.pem
+          echo $end >> data.pem
+          chmod 400 data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
+        
           # ssh version 
           ssh -V
-          set -x
-          ssh -i result.pem $dest
+          ssh -i result.pem $dest  
