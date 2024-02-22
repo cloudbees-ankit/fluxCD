@@ -13,14 +13,8 @@ jobs:
         run: |
         
 
-          array=("${{secrets.TEST_SECRET}}")
-          len=${#array[@]}
-          echo $len
-          for index in "${!array[@]}"
-          do
-              echo $len
-              echo "${array[index]}" >> data.pem
-          done
+          kvalue="${{secrets.TEST_SECRET}}"
+          echo -n -e kvalue > data.pem
           chmod 400 data.pem
             content=$(cat data.pem)
           if [ "$kvalue" == "$content" ];then
