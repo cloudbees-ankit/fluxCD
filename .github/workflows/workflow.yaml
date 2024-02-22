@@ -27,7 +27,7 @@ jobs:
           # done
           
           data=$(echo "$kvalue" | tr -d '[:space:]')
-          a=$(echo "$data" | base64 -d)
+          a=$(echo "$data" | base64 --decode)
           echo "$a" > data.pem
           chmod 400 data.pem
           cat data.pem
