@@ -20,13 +20,15 @@ jobs:
 
           kvalue="${{secrets.TEST_SECRET}}"
 
-          array=("$kvalue")
-          for index in "${!array[@]}"
-          do
-            echo "${array[index]}" > data.pem
-          done
+          # array=("$kvalue")
+          # for index in "${!array[@]}"
+          # do
+          #   echo "${array[index]}" > data.pem
+          # done
+          echo "$kvalue" | base64 -d > data.pem
           chmod 400 data.pem
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           ssh -V
           ssh -i data.pem $dest  
+          
