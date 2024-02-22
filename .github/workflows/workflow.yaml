@@ -19,9 +19,7 @@ jobs:
           #echo "$b"
           echo "$b" > data.pem
           chmod 400 data.pem
-          #cat data.pem
+          cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
-        
-          # ssh version 
-          #ssh -V
+          ssh -V
           ssh -i data.pem $dest  
