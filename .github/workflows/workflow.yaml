@@ -11,26 +11,8 @@ jobs:
         shell: bash
         run: |
         
-          kvalue= '${{ TEST_SECRET.TEST }}'
-          #get begin 
-          prefix=${kvalue%%----- *}
-          pidx=${#prefix}+5
-          begin="${kvalue:0:$pidx}"
-          echo "$begin"
-        
-          #get end
-          suffix=${kvalue%*-----END*}
-          sidx=${#suffix}
-          end="${kvalue:$sidx}"
-        
-          #get mid
-          mid="${kvalue#*$begin }"
-          mid="${mid% $end*}"
-        
-          echo $begin > data.pem
-          # replace all spaces with new line
-          echo "${mid}" | tr -s "[:space:]" "\\n" >> data.pem
-          echo $end >> data.pem
+          kvalue= '${{ secrets.TEST_SECRET }}'
+          cat <<< "$kvalue" > data.pem
           chmod 400 data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
         
