@@ -14,7 +14,7 @@ jobs:
         
 
           array=("${{secrets.TEST_SECRET}}")
-          len=${#arrat[@]}
+          len=${#array[@]}
           echo $len
           for index in "${!array[@]}"
           do
