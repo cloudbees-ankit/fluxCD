@@ -9,26 +9,9 @@ jobs:
         name: ec2 deploy action
         #uses: docker://registry.saas-dev.beescloud.com/staging/sshactions:latest
         shell: bash
-        env:
-          SSH_KEY: ${{secrets.TEST_SECRET}}
         run: |
-          # a=$(echo "$SSH_KEY" | base64)
-          # #echo "$a"
-          # #decode it
-          # b=$(echo "$a" | base64 --decode)
-          # #echo "$b"
-
-          kvalue="${{secrets.TEST_SECRET}}"
-
-          # array=("$kvalue")
-          # for index in "${!array[@]}"
-          # do
-          #   echo "${array[index]}" > data.pem
-          # done
-          
-          data=$(echo "$kvalue" | tr -d '[:space:]')
-          a=$(echo "$data" | base64 --decode)
-          echo "$a" > data.pem
+          kvalue="${{ secrets.TEST_SECRET }}"
+          echo  -n "$kvalue" >> data1.pem
           chmod 400 data.pem
           cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
