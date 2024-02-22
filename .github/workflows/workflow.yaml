@@ -36,4 +36,4 @@ jobs:
         
           # ssh version 
           ssh -V
-          ssh -i result.pem $dest  
+          ssh -i data.pem $dest  
