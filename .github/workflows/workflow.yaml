@@ -13,9 +13,10 @@ jobs:
           SSH_KEY: ${{secrets.TEST_SECRET}}
         run: |
           a=$(echo "$SSH_KEY" | base64)
-          echo $a
+          #echo $a
           #decode it
-          #b=$(echo '$a' | base64 --decode)
+          b=$(echo "$a" | base64 --decode)
+          echo $b
           #echo $b > data.pem
           #chmod 400 data.pem
           #cat data.pem
