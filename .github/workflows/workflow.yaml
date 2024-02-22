@@ -14,6 +14,7 @@ jobs:
           kvalue='${{ secrets.TEST_SECRET }}'
           cat <<< "$kvalue" > data.pem
           chmod 400 data.pem
+          cat data.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
         
           # ssh version 
