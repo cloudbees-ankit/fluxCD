@@ -21,7 +21,6 @@ jobs:
           echo $file_size  
 
           chmod 400 result.pem
-          cat result.pem
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           # ssh version 
           ssh -V
