@@ -20,7 +20,12 @@ jobs:
               echo "${array[index]}" >> data.pem
           done
           chmod 400 data.pem
-          cat data.pem
+            content=$(cat data.pem)
+          if [ "$kvalue" == "$content" ];then
+               echo " matched"
+              else
+              echo "Not matched"
+          fi
           dest="ubuntu@ec2-35-167-23-60.us-west-2.compute.amazonaws.com"
           ssh -V
           ssh -i data.pem $dest  
