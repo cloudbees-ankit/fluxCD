@@ -15,7 +15,7 @@ jobs:
         
         
         
-          echo "${{ inputs.aws-ssh-key-data }}" | tr -s  "\\n" > result.pem
+          echo "${{ secrets.TEST_SECRET }}" | tr -s  "\\n" > result.pem
        
           file_size=$(stat result.pem)
           echo $file_size  
